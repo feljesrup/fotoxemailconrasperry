@@ -1,7 +1,7 @@
 # -*- coding: latin-1 -*-
 import subprocess
 import time
-import RPi.GPIO as GPIO    #Importamos la librería GPIO
+import RPi.GPIO as GPIO    #Importamos la librerÃ­a GPIO
 import time                #Importamos time (time.sleep)
 GPIO.setmode(GPIO.BCM)     #Ponemos la placa en modo BCM
 GPIO_TRIGGER = 25          #Usamos el pin GPIO 25 como TRIGGER
@@ -13,18 +13,18 @@ GPIO.output(GPIO_TRIGGER,False)    #Ponemos el pin 25 como LOW
 try:
     while True:     #Iniciamos un loop infinito
         GPIO.output(GPIO_TRIGGER,True)   #Enviamos un pulso de ultrasonidos
-        time.sleep(0.00001)              #Una pequeñña pausa
+        time.sleep(0.00001)              #Una pequeÃ±Ã±a pausa
         GPIO.output(GPIO_TRIGGER,False)  #Apagamos el pulso
         start = time.time()              #Guarda el tiempo actual mediante time.time()
-        while GPIO.input(GPIO_ECHO)==0:  #Mientras el sensor no reciba señal...
+        while GPIO.input(GPIO_ECHO)==0:  #Mientras el sensor no reciba seÃ±al...
             start = time.time()          #Mantenemos el tiempo actual mediante time.time()
-        while GPIO.input(GPIO_ECHO)==1:  #Si el sensor recibe señal...
+        while GPIO.input(GPIO_ECHO)==1:  #Si el sensor recibe seÃ±al...
             stop = time.time()           #Guarda el tiempo actual mediante time.time() en otra variable
-        elapsed = stop-start             #Obtenemos el tiempo transcurrido entre envío y recepción
+        elapsed = stop-start             #Obtenemos el tiempo transcurrido entre envÃ­o y recepciÃ³n
         distance = (elapsed * 34300)/2   #Distancia es igual a tiempo por velocidad partido por 2   D = (T x V)/2
-        print (distance)                   #Devolvemos la distancia (en centímetros) por pantalla
-        time.sleep(1)                    #Pequeña pausa para no saturar el procesador de la Raspberry
-        if distance<40:
+        print (distance)                   #Devolvemos la distancia (en centÃ­metros) por pantalla
+        time.sleep(1)                    #PequeÃ±a pausa para no saturar el procesador de la Raspberry
+        if distance<40:                  #Si la distancia es menor de 40 cm se envia la foto
             subprocess.call("sudo fswebcam -F 12 imagen.jpg", shell=True)
             # time.sleep(5)
             subprocess.call("python enviaradjuntocorreo2.py", shell=True)
