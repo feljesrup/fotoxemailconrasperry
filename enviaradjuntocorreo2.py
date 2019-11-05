@@ -5,9 +5,9 @@ from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
 from email import encoders
  
-#Iniciamos los par醡etros del script
-remitente = 'pruebasekamigo@gmail.com'
-destinatarios = ['feljesrup@hotmail.com']
+#Iniciamos los par谩metros del script
+remitente = 'aqui va tu correo gmail@gmail.com'
+destinatarios = ['aqui va el correo a donde se enviar谩 la foto']
 asunto = '[RPI] Correo de prueba'
 cuerpo = 'Este es el contenido del mensaje'
 ruta_adjunto = 'imagen.jpg'
@@ -38,14 +38,14 @@ adjunto_MIME.add_header('Content-Disposition', "attachment; filename= %s" % nomb
 # Y finalmente lo agregamos al mensaje
 mensaje.attach(adjunto_MIME)
  
-# Creamos la conexi髇 con el servidor
+# Creamos la conexi贸n con el servidor
 sesion_smtp = smtplib.SMTP('smtp.gmail.com', 587)
  
-# Ciframos la conexi髇
+# Ciframos la conexi贸n
 sesion_smtp.starttls()
 
-# Iniciamos sesi髇 en el servidor
-sesion_smtp.login('pruebasekamigo@gmail.com','chifurinfula12')
+# Iniciamos sesi贸n en el servidor
+sesion_smtp.login('pon aqu铆 un correo de gmail','coloca aqui la contrase帽a del correo')
 
 # Convertimos el objeto mensaje a texto
 texto = mensaje.as_string()
@@ -53,5 +53,5 @@ texto = mensaje.as_string()
 # Enviamos el mensaje
 sesion_smtp.sendmail(remitente, destinatarios, texto)
 
-# Cerramos la conexi髇
+# Cerramos la conexi贸n
 sesion_smtp.quit()
